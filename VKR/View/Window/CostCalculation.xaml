@@ -22,17 +22,20 @@
         </Grid.RowDefinitions>
         <TextBlock Text="Тип страховки" Margin="8,8,8,8" />
         <TextBlock Text="Стоимость имущества" Grid.Row="1" Margin="8,8,8,8" />
-        <TextBlock Text="Страховое покрытие" Grid.Row="2" Margin="8,8,8,8" />
-        <TextBlock Text="Степень риска" Grid.Row="3" Margin="8,8,8,8" />
+        <TextBlock Text="Ставка страхования" Grid.Row="2" Margin="8,8,8,8" />
+        <TextBlock Text="Коэффициент риска" Grid.Row="3" Margin="8,8,8,8" />
 
-        <TextBox Text="{Binding Type}" Grid.Column="1" Margin="8,8,8,8" />
-        <TextBox Text="{Binding PropertyValue}" Grid.Column="1" Grid.Row="1" Margin="8,8,8,8" />
-        <TextBox Text="{Binding InsuranceCoverage}" Grid.Column="1" Grid.Row="2" Margin="8,8,8,8" />
-        <TextBox Text="{Binding DegreeRisk}" Grid.Column="1" Grid.Row="3" Margin="8,8,8,8" />
-
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="5" Grid.Column="1" Margin="121,17,0,27" Width="152" Grid.ColumnSpan="2">
-            <Button IsDefault="True" Click="Accept_Click" >OK</Button>
-            <Button IsCancel="True" >Отмена</Button>
+        <TextBox x:Name="Type" Text="{Binding Type }" Grid.Column="1" Margin="8,8,8,8" />
+        <TextBox x:Name="PropertyValue" Text="{Binding PropertyValue}" Grid.Column="1" Grid.Row="1" Margin="8,8,8,8" />
+        <TextBox x:Name="InsuranceCoverage" Text="{Binding InsuranceCoverage}" Grid.Column="1" Grid.Row="2" Margin="8,8,8,8" />
+        <TextBox x:Name="DegreeRisk" Text="{Binding DegreeRisk}" Grid.Column="1" Grid.Row="3" Margin="8,8,8,8" />
+        <TextBlock Text="Стоимость страхования" Grid.Row="4" Margin="8 8 8 8">
+            <TextBox x:Name="PriceInsurance" IsReadOnly="True" Grid.Column="1" Grid.Row="4" Margin="8,8,8,8"></TextBox>
+        </TextBlock>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="5" Grid.Column="1" Margin="30,22,0,22" Width="433" Grid.ColumnSpan="3">
+            <Button IsDefault="True" Click="Accept_Click" Width="74" >OK</Button>
+            <Button IsCancel="True" Width="92" Content="Отмена" RenderTransformOrigin="1.36,0.566" />
+            <Button IsDefault="True" Content="Рассчитать стоимость страховки" Click="Calculate_Click" ></Button>
         </StackPanel>
     </Grid>
 </Window>

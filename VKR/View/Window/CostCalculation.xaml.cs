@@ -32,5 +32,20 @@ namespace VKR
         {
             DialogResult = true;
         }
+
+        private void Calculate_Click(object sender, RoutedEventArgs e)
+        {
+            double propertyValue = double.Parse(PropertyValue.Text);
+            double insuranceCoverage = double.Parse(InsuranceCoverage.Text) * 0.01;
+            double degreeRisk = double.Parse(DegreeRisk.Text);
+
+            // Выполняем расчет стоимости страхования
+            double insuranceCost = propertyValue * insuranceCoverage * degreeRisk;
+
+            // Устанавливаем результат в TextBox для стоимости страхования
+            PriceInsurance.Text = insuranceCost.ToString();
+            Insurance.PriceInsurance = Convert.ToString(insuranceCost);
+
+        }
     }
 }

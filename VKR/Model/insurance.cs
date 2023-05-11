@@ -13,5 +13,6 @@ namespace VKR.Model
         public string PropertyValue { get; set; }
         public string InsuranceCoverage { get; set; }
         public string DegreeRisk { get; set; }
+        public string PriceInsurance { get; set; }
     }
 }

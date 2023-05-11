@@ -13,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VKR.Model;
-
 namespace VKR
 {
     /// <summary>
@@ -33,6 +32,7 @@ namespace VKR
             db.Database.EnsureCreated();
             // загружаем данные из БД
             db.PossibleClients.Load();
+            db.insurances.Load();
             // и устанавливаем данные в качестве контекста
             DataContext = db.PossibleClients.Local.ToObservableCollection();
         }
@@ -88,5 +88,28 @@ namespace VKR
             db.PossibleClients.Remove(user);
             db.SaveChanges();
         }
+
+        private void Calculate_Click(object sender, RoutedEventArgs e)
+        {
+            CostCalculation CostCalculation = new CostCalculation(new insurance());
+            if (CostCalculation.ShowDialog() == true)
+            {
+                insurance User = CostCalculation.Insurance;
+                db.insurances.Add(User);
+                db.SaveChanges();
+            }
+        }
+        private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (userList.SelectedItem != null)
+            {
+                CalculateButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                CalculateButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
     }
 }

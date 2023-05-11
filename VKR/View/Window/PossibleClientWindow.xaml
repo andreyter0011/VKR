@@ -17,7 +17,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <DataGrid x:Name="userList" ItemsSource="{Binding}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000">
+        <DataGrid x:Name="userList" ItemsSource="{Binding}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000" SelectionChanged="myDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ФИО" Binding="{Binding Name}" FontSize="14"></DataGridTextColumn>
                 <DataGridTextColumn Header="Возраст" Binding="{Binding Age}" FontSize="14"></DataGridTextColumn>
@@ -26,7 +26,12 @@
             </DataGrid.Columns>
         </DataGrid>
         <Frame x:Name="frame"/>
-        <StackPanel x:Name="ButtonPanel" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Height="57" VerticalAlignment="Top" Margin="132,66,0,0" Width="336" Grid.ColumnSpan="2">
+        <StackPanel x:Name="ButtonPanel" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Height="57" VerticalAlignment="Top" Margin="132,66,0,0" Width="522" Grid.ColumnSpan="2">
+            <Button x:Name="CalculateButton" Content="Расчет страховки" Margin="10" Click="Calculate_Click" Visibility="Collapsed" >
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
             <Button Content="Добавить" Margin="10" Click="Add_Click" >
                 <Button.Effect>
                     <DropShadowEffect/>

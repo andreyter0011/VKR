@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace VKR
     /// </summary>
     public partial class ClientAddWindow : Window
     {
+        ApplicationContext db = new ApplicationContext();
         public Client Client { get; set; }
         public ClientAddWindow(Client client)
         {

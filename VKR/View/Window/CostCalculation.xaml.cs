@@ -20,6 +20,7 @@ namespace VKR
     /// </summary>
     public partial class CostCalculation : Window
     {
+        ApplicationContext db = new ApplicationContext();
         public insurance Insurance { get; set; }
         public CostCalculation(insurance insurance)
         {
@@ -35,6 +36,7 @@ namespace VKR
 
         private void Calculate_Click(object sender, RoutedEventArgs e)
         {
+
             double propertyValue = double.Parse(PropertyValue.Text);
             double insuranceCoverage = double.Parse(InsuranceCoverage.Text) * 0.01;
             double degreeRisk = double.Parse(DegreeRisk.Text);
@@ -45,7 +47,6 @@ namespace VKR
             // Устанавливаем результат в TextBox для стоимости страхования
             PriceInsurance.Text = insuranceCost.ToString();
             Insurance.PriceInsurance = Convert.ToString(insuranceCost);
-
         }
     }
 }

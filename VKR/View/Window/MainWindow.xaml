@@ -3,49 +3,96 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VKR"
         mc:Ignorable="d"
-         Title="MainWindow" Height="600" Width="600" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
-    <Grid RenderTransformOrigin="0.5,0.5">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="97*"/>
-            <ColumnDefinition Width="33*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-        <DataGrid x:Name="userList" ItemsSource="{Binding}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ФИО" Binding="{Binding Name}" FontSize="14"></DataGridTextColumn>
-                <DataGridTextColumn Header="Возраст" Binding="{Binding Age}" FontSize="14"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата рождения" Binding="{Binding Birth}" FontSize="14"></DataGridTextColumn>
-                <DataGridTextColumn Header="Паспорт" Binding="{Binding Passport}" FontSize="14"></DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Frame x:Name="frame"/>
-        <Button x:Name="DetailButton" Grid.Row="2" Content="Подробнее" Margin="246,18,0,228" HorizontalAlignment="Left" Click="Button_Click" RenderTransformOrigin="0.491,2.089" Width="108">
-            <Button.Effect>
-                <DropShadowEffect/>
-            </Button.Effect>
-        </Button>
-        <StackPanel x:Name="ButtonPanel" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Height="57" VerticalAlignment="Top" Margin="132,66,0,0" Width="336" Grid.ColumnSpan="2">
-            <Button Content="Добавить" Margin="10" Click="Add_Click" >
-                <Button.Effect>
-                    <DropShadowEffect/>
-                </Button.Effect>
-            </Button>
-            <Button Content="Изменить" Margin="10" Click="Edit_Click"  >
-                <Button.Effect>
-                    <DropShadowEffect/>
-                </Button.Effect>
-            </Button>
-            <Button Content="Удалить" Margin="10" Click="Delete_Click"  >
-                <Button.Effect>
-                    <DropShadowEffect/>
-                </Button.Effect>
-            </Button>
-        </StackPanel>
+        Title="MainWindow" Height="800" Width="800" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" SizeToContent="Height">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Клиенты">
+                <Grid RenderTransformOrigin="0.5,0.5" Margin="0,0,0,-6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="97*"/>
+                        <ColumnDefinition Width="33*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="userList" ItemsSource="{Binding}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="378" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000" Grid.RowSpan="4" SelectionChanged="myDataGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding Name}" FontSize="14"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Возраст" Binding="{Binding Age}" FontSize="14"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Дата рождения" Binding="{Binding Birth}" FontSize="14"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Паспорт" Binding="{Binding Passport}" FontSize="14"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel x:Name="ButtonPanel" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Height="57" VerticalAlignment="Top" Margin="67,383,0,0" Width="642" Grid.ColumnSpan="2">
+                        <Button Name="detailButton" Content="Подробнее" Margin="10" Click="Button_Click" Visibility="Collapsed">
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                        </Button>
+                        <Button x:Name="CalculateButton" Content="Расчет страховки" Margin="10" Click="Insurance_Click" Visibility="Collapsed" >
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                        </Button>
+                        <Button Content="Добавить" Margin="10" Click="Add_Click" >
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                        </Button>
+                        <Button Content="Изменить" Margin="10" Click="Edit_Click"  >
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                        </Button>
+                        <Button Content="Удалить" Margin="10" Click="Delete_Click"  >
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Страховка">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition  />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition  />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition  />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Тип страховки" Margin="8,8,8,8" />
+                    <TextBlock Text="Стоимость имущества" Grid.Row="1" Margin="8,8,8,8" />
+                    <TextBlock Text="Ставка страхования" Grid.Row="2" Margin="8,8,8,8" />
+                    <TextBlock Text="Коэффициент риска" Grid.Row="3" Margin="8,8,8,8" />
+
+                    <TextBox x:Name="Type" Text="{Binding Type }" Grid.Column="1" Margin="8,8,8,8" />
+                    <TextBox x:Name="PropertyValue" Text="{Binding PropertyValue}" Grid.Column="1" Grid.Row="1" Margin="8,8,8,8" />
+                    <TextBox x:Name="InsuranceCoverage" Text="{Binding InsuranceCoverage}" Grid.Column="1" Grid.Row="2" Margin="8,8,8,8" />
+                    <TextBox x:Name="DegreeRisk" Text="{Binding DegreeRisk}" Grid.Column="1" Grid.Row="3" Margin="8,8,8,8" />
+                    <TextBlock Text="Стоимость страхования" Grid.Row="4" Margin="8 8 8 8">
+            <TextBox x:Name="PriceInsurance" IsReadOnly="True" Grid.Column="1" Grid.Row="4" Margin="8,8,8,8"></TextBox>
+                    </TextBlock>
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="5" Margin="10,10,0,121" Width="276" Grid.ColumnSpan="2">
+                        <Button IsDefault="True" Content="Рассчитать стоимость страховки" Click="Calculate_Click" Margin="8 8 8 8" Height="37" RenderTransformOrigin="0.484,0.733" ></Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Договор">
+                <!-- Содержимое третьей вкладки -->
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

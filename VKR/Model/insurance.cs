@@ -9,10 +9,10 @@ namespace VKR.Model
     public class insurance
     {
         public int Id { get; set; }
-        public string Type { get; set; }
-        public string PropertyValue { get; set; }
-        public string InsuranceCoverage { get; set; }
-        public string DegreeRisk { get; set; }
-        public string PriceInsurance { get; set; }
+        public string? Type { get; set; }
+        public string? PropertyValue { get; set; }
+        public string? InsuranceCoverage { get; set; }
+        public string? DegreeRisk { get; set; }
+        public string? PriceInsurance { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +18,7 @@ using VKR.Model;
 namespace VKR
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -27,10 +26,10 @@ namespace VKR
         public MainWindow()
         {
             InitializeComponent();
-
-            Loaded += MainWindow_Loaded;
+            Loaded += Client_Loaded;
         }
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+
+        private void Client_Loaded(object sender, RoutedEventArgs e)
         {
             // гарантируем, что база данных создана
             db.Database.EnsureCreated();
@@ -38,6 +37,7 @@ namespace VKR
             db.Clients.Load();
             // и устанавливаем данные в качестве контекста
             DataContext = db.Clients.Local.ToObservableCollection();
+
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
@@ -105,32 +105,46 @@ namespace VKR
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // получаем выделенный объект
             Client? user = userList.SelectedItem as Client;
             // если ни одного объекта не выделено, выходим
             if (user is null) return;
             Detail detail = new Detail();
-
-            frame.NavigationService.Navigate(detail);
-
-            ButtonPanel.Visibility = Visibility.Collapsed;
-            DetailButton.Visibility = Visibility.Collapsed;
-            userList.Visibility = Visibility.Collapsed;
+            detail.Show();
         }
-        private void frame_Navigated(object sender, NavigationEventArgs e)
+
+        private void Calculate_Click(object sender, RoutedEventArgs e)
         {
-            // Проверяем, что текущая страница - Detail
-            if (e.Content is Detail)
+            double propertyValue = double.Parse(PropertyValue.Text);
+            double insuranceCoverage = double.Parse(InsuranceCoverage.Text) * 0.01;
+            double degreeRisk = double.Parse(DegreeRisk.Text);
+
+            // Выполняем расчет стоимости страхования
+            double insuranceCost = propertyValue * insuranceCoverage * degreeRisk;
+
+            // Устанавливаем результат в TextBox для стоимости страхования
+            PriceInsurance.Text = insuranceCost.ToString();
+        }
+        private void Insurance_Click(object sender, RoutedEventArgs e)
+        {
+            CostCalculation CostCalculation = new CostCalculation(new insurance());
+            if (CostCalculation.ShowDialog() == true)
             {
-                // Скрываем нужные элементы на MainWindow
-                ButtonPanel.Visibility = Visibility.Collapsed;
-                DetailButton.Visibility = Visibility.Collapsed;
+                insurance User = CostCalculation.Insurance;
+                db.insurances.Add(User);
+                db.SaveChanges();
+            }
+        }
+        private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (userList.SelectedItem != null)
+            {
+                CalculateButton.Visibility = Visibility.Visible;
+                detailButton.Visibility = Visibility.Visible;
             }
             else
             {
-                // Показываем элементы на MainWindow
-                ButtonPanel.Visibility = Visibility.Visible;
-                DetailButton.Visibility = Visibility.Visible;
+                CalculateButton.Visibility = Visibility.Collapsed;
+                detailButton.Visibility = Visibility.Collapsed;
             }
         }
     }

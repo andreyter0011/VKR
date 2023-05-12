@@ -32,10 +32,12 @@
         <TextBlock Text="Стоимость страхования" Grid.Row="4" Margin="8 8 8 8">
             <TextBox x:Name="PriceInsurance" IsReadOnly="True" Grid.Column="1" Grid.Row="4" Margin="8,8,8,8"></TextBox>
         </TextBlock>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="5" Grid.Column="1" Margin="30,22,0,22" Width="433" Grid.ColumnSpan="3">
-            <Button IsDefault="True" Click="Accept_Click" Width="74" >OK</Button>
-            <Button IsCancel="True" Width="92" Content="Отмена" RenderTransformOrigin="1.36,0.566" />
-            <Button IsDefault="True" Content="Рассчитать стоимость страховки" Click="Calculate_Click" ></Button>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="5" Margin="10,10,0,121" Width="276" Grid.ColumnSpan="2">
+            <Button IsDefault="True" Content="Рассчитать стоимость страховки" Click="Calculate_Click" Margin="8 8 8 8" ></Button>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="5" Margin="159,80,0,40" Width="200" Grid.ColumnSpan="3" Grid.Column="1">
+            <Button IsDefault="True" Click="Accept_Click" Width="74" Content="ОК" Margin="8 8 8 8" ></Button>
+            <Button IsCancel="True" Width="92" Content="Отмена" Margin="8 8 8 8" />
         </StackPanel>
     </Grid>
 </Window>

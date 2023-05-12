@@ -11,21 +11,33 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VKR.Model;
+using VKR.ViewModel;
 
 namespace VKR
 {
     /// <summary>
     /// Interaction logic for Detail.xaml
     /// </summary>
-    public partial class Detail : Page
+    public partial class Detail : Window
     {
         ApplicationContext db = new ApplicationContext();
         public Detail()
         {
             InitializeComponent();
+            DataContext = new ClientAndInsurance();
+            //Loaded += Detail_Loaded;
         }
+
+        //private void Detail_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    // гарантируем, что база данных создана
+        //    db.Database.EnsureCreated();
+        //    // загружаем данные из БД
+        //    db.Clients.Load();
+        //    db.insurances.Load();
+        //    DataContext = db.Clients.Local.ToObservableCollection();
+        //}
     }
 }

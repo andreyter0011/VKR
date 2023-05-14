@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VKR.Model;
+using VKR.ViewModel;
 
 namespace VKR
 {
@@ -26,18 +27,7 @@ namespace VKR
         public MainWindow()
         {
             InitializeComponent();
-            Loaded += Client_Loaded;
-        }
-
-        private void Client_Loaded(object sender, RoutedEventArgs e)
-        {
-            // гарантируем, что база данных создана
-            db.Database.EnsureCreated();
-            // загружаем данные из БД
-            db.Clients.Load();
-            // и устанавливаем данные в качестве контекста
-            DataContext = db.Clients.Local.ToObservableCollection();
-
+            DataContext = new ClientAndInsurance();
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
@@ -47,6 +37,8 @@ namespace VKR
                 Client User = ClientAddWindow.Client;
                 db.Clients.Add(User);
                 db.SaveChanges();
+                ((ClientAndInsurance)DataContext).Clients.Add(User);
+                CollectionViewSource.GetDefaultView(((ClientAndInsurance)DataContext).Clients).Refresh();
             }
         }
         // редактирование
@@ -89,7 +81,7 @@ namespace VKR
                     user.PriceContract = UserWindow.Client.PriceContract;
                     user.HowLongContract = UserWindow.Client.HowLongContract;
                     db.SaveChanges();
-                    userList.Items.Refresh();
+                    CollectionViewSource.GetDefaultView(((ClientAndInsurance)DataContext).Clients).Refresh();
                 }
             }
         }
@@ -102,6 +94,8 @@ namespace VKR
             if (user is null) return;
             db.Clients.Remove(user);
             db.SaveChanges();
+            ((ClientAndInsurance)DataContext).Clients.Remove(user);
+            CollectionViewSource.GetDefaultView(((ClientAndInsurance)DataContext).Clients).Refresh();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -111,27 +105,15 @@ namespace VKR
             Detail detail = new Detail();
             detail.Show();
         }
-
-        private void Calculate_Click(object sender, RoutedEventArgs e)
-        {
-            double propertyValue = double.Parse(PropertyValue.Text);
-            double insuranceCoverage = double.Parse(InsuranceCoverage.Text) * 0.01;
-            double degreeRisk = double.Parse(DegreeRisk.Text);
-
-            // Выполняем расчет стоимости страхования
-            double insuranceCost = propertyValue * insuranceCoverage * degreeRisk;
-
-            // Устанавливаем результат в TextBox для стоимости страхования
-            PriceInsurance.Text = insuranceCost.ToString();
-        }
         private void Insurance_Click(object sender, RoutedEventArgs e)
         {
             CostCalculation CostCalculation = new CostCalculation(new insurance());
             if (CostCalculation.ShowDialog() == true)
             {
                 insurance User = CostCalculation.Insurance;
-                db.insurances.Add(User);
                 db.SaveChanges();
+                ((ClientAndInsurance)DataContext).Insurances.Remove(User);
+                CollectionViewSource.GetDefaultView(((ClientAndInsurance)DataContext).Insurances).Refresh();
             }
         }
         private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,10 +29,32 @@ namespace VKR
 
             Insurance = insurance;
             DataContext = Insurance;
+            db.Clients.Load();
+            ClientBox.ItemsSource = db.Clients.Local.ToObservableCollection();
         }
         void Accept_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            // Получаем выбранного клиента
+            var selectedClient = (Client)ClientBox.SelectedItem;
+
+            // Проверяем, что клиент существует
+            if (selectedClient != null)
+            {
+                // Устанавливаем ClientId в объекте Insurance
+                Insurance.Client = selectedClient;
+
+                // Добавляем Insurance в контекст базы данных и сохраняем изменения
+                db.insurances.Add(Insurance);
+                db.SaveChanges();
+
+                // Закрываем окно и возвращаем результат DialogResult = true
+                DialogResult = true;
+            }
+            else
+            {
+                // Выводим сообщение об ошибке, если клиент не выбран
+                MessageBox.Show("Please select a client.");
+            }
         }
 
         private void Calculate_Click(object sender, RoutedEventArgs e)

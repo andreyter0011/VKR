@@ -15,6 +15,7 @@ namespace VKR.Model
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=VKR.db");
+            optionsBuilder.EnableSensitiveDataLogging();
         }
     }
 }

@@ -27,17 +27,6 @@ namespace VKR
         {
             InitializeComponent();
             DataContext = new ClientAndInsurance();
-            //Loaded += Detail_Loaded;
         }
-
-        //private void Detail_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    // гарантируем, что база данных создана
-        //    db.Database.EnsureCreated();
-        //    // загружаем данные из БД
-        //    db.Clients.Load();
-        //    db.insurances.Load();
-        //    DataContext = db.Clients.Local.ToObservableCollection();
-        //}
     }
 }

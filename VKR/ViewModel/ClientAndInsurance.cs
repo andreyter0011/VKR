@@ -7,25 +7,22 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using VKR.Model;
 
 namespace VKR.ViewModel
 {
-    public class ClientAndInsurance
+    public class ClientAndInsurance : INotifyPropertyChanged
     {
         private readonly ApplicationContext db = new ApplicationContext();
         private ObservableCollection<Client> clients;
         private ObservableCollection<insurance> insurances;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public ObservableCollection<Client> Clients
         {
             get => clients;
             set
             {
                 clients = value;
-                OnPropertyChanged();
             }
         }
 
@@ -35,7 +32,6 @@ namespace VKR.ViewModel
             set
             {
                 insurances = value;
-                OnPropertyChanged();
             }
         }
 
@@ -47,10 +43,11 @@ namespace VKR.ViewModel
             db.insurances.Load();
             Insurances = db.insurances.Local.ToObservableCollection();
         }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

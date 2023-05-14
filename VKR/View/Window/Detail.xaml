@@ -22,6 +22,7 @@
                         </Grid.ColumnDefinitions>
                         <DataGrid x:Name="InsuranceList" ItemsSource="{Binding Path=Insurances}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000">
                             <DataGrid.Columns>
+                                <DataGridTextColumn Header="Клиент" Binding="{Binding Client.Name}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Тип страховки" Binding="{Binding Type}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Стоимость имущества" Binding="{Binding PropertyValue}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Ставка страхования" Binding="{Binding InsuranceCoverage}" FontSize="14"></DataGridTextColumn>

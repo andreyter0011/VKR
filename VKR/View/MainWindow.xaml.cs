@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VKR.Model;
+using VKR.View;
 using VKR.ViewModel;
 
 namespace VKR
@@ -130,12 +131,10 @@ namespace VKR
         {
             if (userList.SelectedItem != null)
             {
-                CalculateButton.Visibility = Visibility.Visible;
                 detailButton.Visibility = Visibility.Visible;
             }
             else
             {
-                CalculateButton.Visibility = Visibility.Collapsed;
                 detailButton.Visibility = Visibility.Collapsed;
             }
         }
@@ -149,6 +148,18 @@ namespace VKR
                 db.SaveChanges();
                 ((ClientAndInsurance)DataContext).InsuranceCases.Remove(insuranceCase);
                 CollectionViewSource.GetDefaultView(((ClientAndInsurance)DataContext).Insurances).Refresh();
+            }
+        }
+
+        private void Contract_Click(object sender, RoutedEventArgs e)
+        {
+            ContractAddWindow ContractAddWindow = new ContractAddWindow(new Contract());
+            if (ContractAddWindow.ShowDialog() == true)
+            {
+                Contract contract = ContractAddWindow.Contract;
+                db.SaveChanges();
+                ((ClientAndInsurance)DataContext).Contracts.Remove(contract);
+                CollectionViewSource.GetDefaultView(((ClientAndInsurance)DataContext).Contracts).Refresh();
             }
         }
     }

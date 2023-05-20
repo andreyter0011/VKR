@@ -36,7 +36,6 @@ namespace VKR
             var selectedInsurance = (insurance)InsuranceBox.SelectedItem;
             Client.Insurance = selectedInsurance;
             // Добавляем Insurance в контекст базы данных и сохраняем изменения
-            db.Clients.Add(Client);
             db.SaveChanges();
 
             // Закрываем окно и возвращаем результат DialogResult = true

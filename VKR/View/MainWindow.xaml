@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="850" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" SizeToContent="Height">
+        Title="MainWindow" Height="644" Width="850" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" SizeToContent="Height">
     <Window.DataContext>
         <vm:ClientAndInsurance />
     </Window.DataContext>
@@ -111,11 +111,6 @@
                                 <DropShadowEffect/>
                             </Button.Effect>
                         </Button>
-                        <Button x:Name="CalculateButton" Content="Расчет страховки" Margin="10" Click="Insurance_Click" Visibility="Collapsed" >
-                            <Button.Effect>
-                                <DropShadowEffect/>
-                            </Button.Effect>
-                        </Button>
                         <Button Content="Добавить" Margin="10" Click="Add_Click" >
                             <Button.Effect>
                                 <DropShadowEffect/>
@@ -136,7 +131,11 @@
             </TabItem>
             <TabItem Style="{StaticResource TabItem}" Header="Страховка">
                 <Grid>
-                    <DataGrid x:Name="InsuranceList" ItemsSource="{Binding Path=Insurances}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="254" VerticalAlignment="Top" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="InsuranceList" ItemsSource="{Binding Path=Insurances}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="254" VerticalAlignment="Top" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000" Margin="0,0,10,0">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Тип страховки" Binding="{Binding Type}" FontSize="14"></DataGridTextColumn>
                             <DataGridTextColumn Header="Стоимость имущества" Binding="{Binding PropertyValue}" FontSize="14"></DataGridTextColumn>
@@ -157,10 +156,20 @@
                             </Button.Effect>
                         </Button>
                     </StackPanel>
+                    <DataGrid Grid.Row="1" x:Name="ContractList" ItemsSource="{Binding Path=Contracts}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="254" VerticalAlignment="Top" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000" Margin="0,0,10,0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Договор" Binding="{Binding Name}" FontSize="14"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Номер договора" Binding="{Binding NumberContract}" FontSize="14"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Grid.Row="1" x:Name="ButtonPanel2" Orientation="Horizontal" HorizontalAlignment="Left" Height="57" VerticalAlignment="Top" Margin="10,254,0,0" Width="642">
+                        <Button Content="Составить договор" Margin="10" Click="Contract_Click" >
+                            <Button.Effect>
+                                <DropShadowEffect/>
+                            </Button.Effect>
+                        </Button>
+                    </StackPanel>
                 </Grid>
-            </TabItem>
-            <TabItem Style="{StaticResource TabItem}" Header="Договор">
-
             </TabItem>
             <TabItem Style="{StaticResource TabItem}" Header="Информация">
                 <Grid>

@@ -18,6 +18,7 @@ namespace VKR.ViewModel
         private ObservableCollection<Client> clients;
         private ObservableCollection<insurance> insurances;
         private ObservableCollection<InsuranceCase> insuranceCases;
+        private ObservableCollection<Contract> contracts;
         public ObservableCollection<Client> Clients
         {
             get => clients;
@@ -44,6 +45,14 @@ namespace VKR.ViewModel
                 insuranceCases = value;
             }
         }
+        public ObservableCollection<Contract> Contracts
+        {
+            get => contracts;
+            set
+            {
+                contracts = value;
+            }
+        }
         public ClientAndInsurance()
         {
             db.Database.EnsureCreated();
@@ -53,6 +62,8 @@ namespace VKR.ViewModel
             Insurances = db.insurances.Local.ToObservableCollection();
             db.insuranceCases.Load();
             InsuranceCases = db.insuranceCases.Local.ToObservableCollection();
+            db.Contracts.Load();
+            Contracts = db.Contracts.Local.ToObservableCollection();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")

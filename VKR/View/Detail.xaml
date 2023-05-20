@@ -13,6 +13,20 @@
         <Grid>
             <TabControl>
                 <TabItem Header="Договор">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <DataGrid x:Name="ContractList" ItemsSource="{Binding Path=Contracts}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Клиент" Binding="{Binding Client.Name}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Тип страховки" Binding="{Binding insurance.Type}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Договор" Binding="{Binding Name}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Номер договора" Binding="{Binding NumberContract}" FontSize="14"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Информация о страховке">
                     <Grid>

@@ -31,10 +31,11 @@ namespace VKR
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            ClientAddWindow ClientAddWindow = new ClientAddWindow(new Client());
+            ClientAddWindow ClientAddWindow = new ClientAddWindow(new Client() { Id = Guid.NewGuid() });
             if (ClientAddWindow.ShowDialog() == true)
             {
                 Client User = ClientAddWindow.Client;
+                User.Id = Guid.NewGuid();
                 db.Clients.Add(User);
                 db.SaveChanges();
                 ((ClientAndInsurance)DataContext).Clients.Add(User);
@@ -62,6 +63,7 @@ namespace VKR
                 TypeContract = user.TypeContract,
                 PriceContract = user.PriceContract,
                 HowLongContract = user.HowLongContract,
+                Insurance = user.Insurance,
             });
 
             if (UserWindow.ShowDialog() == true)
@@ -80,22 +82,30 @@ namespace VKR
                     user.TypeContract = UserWindow.Client.TypeContract;
                     user.PriceContract = UserWindow.Client.PriceContract;
                     user.HowLongContract = UserWindow.Client.HowLongContract;
+                    user.Insurance = UserWindow.Client.Insurance;
                     db.SaveChanges();
-                    CollectionViewSource.GetDefaultView(((ClientAndInsurance)DataContext).Clients).Refresh();
                 }
             }
         }
         // удаление
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            // получаем выделенный объект
             Client? user = userList.SelectedItem as Client;
-            // если ни одного объекта не выделено, выходим
             if (user is null) return;
+
+            var insurance = db.insurances.FirstOrDefault(i => i.Client.Id == user.Id);
+            if (insurance != null)
+            {
+                db.Entry(insurance).State = EntityState.Detached;
+                insurance.Client = null;
+            }
+
             db.Clients.Remove(user);
             db.SaveChanges();
+
             ((ClientAndInsurance)DataContext).Clients.Remove(user);
             CollectionViewSource.GetDefaultView(((ClientAndInsurance)DataContext).Clients).Refresh();
+
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -127,6 +137,18 @@ namespace VKR
             {
                 CalculateButton.Visibility = Visibility.Collapsed;
                 detailButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void InsuranceCase_Click(object sender, RoutedEventArgs e)
+        {
+            InsuranceCaseWindow InsuranceCaseWindow = new InsuranceCaseWindow(new InsuranceCase());
+            if (InsuranceCaseWindow.ShowDialog() == true)
+            {
+                InsuranceCase insuranceCase = InsuranceCaseWindow.InsuranceCase;
+                db.SaveChanges();
+                ((ClientAndInsurance)DataContext).InsuranceCases.Remove(insuranceCase);
+                CollectionViewSource.GetDefaultView(((ClientAndInsurance)DataContext).Insurances).Refresh();
             }
         }
     }

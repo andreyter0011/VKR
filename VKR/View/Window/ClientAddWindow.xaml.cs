@@ -28,9 +28,18 @@ namespace VKR
             InitializeComponent();
             Client = client;
             DataContext = Client;
+            db.insurances.Load();
+            InsuranceBox.ItemsSource = db.insurances.Local.ToObservableCollection();
         }
         void Accept_Click(object sender, RoutedEventArgs e)
         {
+            var selectedInsurance = (insurance)InsuranceBox.SelectedItem;
+            Client.Insurance = selectedInsurance;
+            // Добавляем Insurance в контекст базы данных и сохраняем изменения
+            db.Clients.Add(Client);
+            db.SaveChanges();
+
+            // Закрываем окно и возвращаем результат DialogResult = true
             DialogResult = true;
         }
     }

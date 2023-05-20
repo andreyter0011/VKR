@@ -30,7 +30,7 @@
         <TextBox x:Name="PropertyValue" Text="{Binding PropertyValue}" Grid.Column="1" Grid.Row="1" Margin="8,8,8,8" />
         <TextBox x:Name="InsuranceCoverage" Text="{Binding InsuranceCoverage}" Grid.Column="1" Grid.Row="2" Margin="8,8,8,8" />
         <TextBox x:Name="DegreeRisk" Text="{Binding DegreeRisk}" Grid.Column="1" Grid.Row="3" Margin="8,8,8,8" />
-        <ComboBox  Name="ClientBox" Grid.Column="4" DisplayMemberPath="Name"></ComboBox>
+        <ComboBox  Name="ClientBox" Grid.Column="1" DisplayMemberPath="Name" Grid.ColumnSpan="3" Margin="318,36,0,0" Grid.RowSpan="2" VerticalAlignment="Top"></ComboBox>
         <TextBlock Text="Стоимость страхования" Grid.Row="4" Margin="8 8 8 8">
             <TextBox x:Name="PriceInsurance" IsReadOnly="True" Grid.Column="1" Grid.Row="4" Margin="8,8,8,8"></TextBox>
         </TextBlock>

@@ -145,13 +145,13 @@
                             <DataGridTextColumn Header="Цена страхования" Binding="{Binding PriceInsurance}" FontSize="14"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <StackPanel x:Name="ButtonPanel1" Orientation="Horizontal" HorizontalAlignment="Left" Height="57" VerticalAlignment="Top" Margin="10,259,0,0" Width="642">
+                    <StackPanel x:Name="ButtonPanel1" Orientation="Horizontal" HorizontalAlignment="Left" Height="57" VerticalAlignment="Top" Margin="10,254,0,0" Width="642">
                         <Button Content="Расчет страховки" Margin="10" Click="Insurance_Click" >
                             <Button.Effect>
                                 <DropShadowEffect/>
                             </Button.Effect>
                         </Button>
-                        <Button Content="Страховой случай" Margin="10" Click="Insurance_Click" >
+                        <Button Content="Страховой случай" Margin="10" Click="InsuranceCase_Click">
                             <Button.Effect>
                                 <DropShadowEffect/>
                             </Button.Effect>
@@ -159,10 +159,13 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
+            <TabItem Style="{StaticResource TabItem}" Header="Договор">
+
+            </TabItem>
             <TabItem Style="{StaticResource TabItem}" Header="Информация">
                 <Grid>
                     <TabControl Style="{StaticResource TabControl}">
-                        <TabItem Style="{StaticResource TabItem}" Header="Клиенты за последние года">
+                        <TabItem Style="{StaticResource TabItem}" Header="Клиенты за определенный год">
                             <Grid RenderTransformOrigin="0.5,0.5" Margin="0,0,0,-6">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="97*"/>
@@ -174,14 +177,16 @@
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
-                                <DataGrid x:Name="userListInfo" ItemsSource="{Binding Path=Clients}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="378" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000" Grid.RowSpan="4" SelectionChanged="myDataGrid_SelectionChanged">
+                                <DataGrid x:Name="userListInfo" ItemsSource="{Binding Path=Clients}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="335" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000" Grid.RowSpan="4" SelectionChanged="myDataGrid_SelectionChanged">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="ФИО" Binding="{Binding Name}" FontSize="14"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Возраст" Binding="{Binding Age}" FontSize="14"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Дата рождения" Binding="{Binding Birth}" FontSize="14"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Паспорт" Binding="{Binding Passport}" FontSize="14"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Дата заключение договора" Binding="{Binding DataStartContract}" FontSize="14"></DataGridTextColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
+                                <DatePicker Name="datePicker" Margin="10,355,406,0" Grid.Row="3" VerticalAlignment="Top" />
                             </Grid>
                         </TabItem>
                         <TabItem Style="{StaticResource TabItem}" Header="Страховка по типам">
@@ -219,9 +224,19 @@
                                         <DataGridTextColumn Header="Возраст" Binding="{Binding Age}" FontSize="14"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Дата рождения" Binding="{Binding Birth}" FontSize="14"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Паспорт" Binding="{Binding Passport}" FontSize="14"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Страховка" Binding="{Binding Insurance.Type}" FontSize="14"></DataGridTextColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
+                        </TabItem>
+                        <TabItem Style="{StaticResource TabItem}" Header="Клиенты у которых скоро заканчивается договор">
+
+                        </TabItem>
+                        <TabItem Style="{StaticResource TabItem}" Header="Клиенты с большим риском">
+
+                        </TabItem>
+                        <TabItem Style="{StaticResource TabItem}" Header="Клиенты которым выплатили за страховой случай">
+
                         </TabItem>
                     </TabControl>
                 </Grid>

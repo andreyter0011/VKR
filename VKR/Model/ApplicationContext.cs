@@ -12,6 +12,7 @@ namespace VKR.Model
     {
         public DbSet<Client> Clients { get; set; }
         public DbSet<insurance> insurances { get; set; }
+        public DbSet<InsuranceCase> insuranceCases { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=VKR.db");

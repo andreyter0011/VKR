@@ -24,5 +24,7 @@ namespace VKR.Model
         public string? TypeContract { get; set; }
         public decimal PriceContract { get; set; }
         public int HowLongContract { get; set; }
+        [ForeignKey("InsuranceId")]
+        public insurance? Insurance { get; set; }
     }
 }

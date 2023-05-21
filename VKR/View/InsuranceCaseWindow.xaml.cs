@@ -56,5 +56,17 @@ namespace VKR
                 MessageBox.Show("Please select a client.");
             }
         }
+
+        private void CalculateLoses_Click(object sender, RoutedEventArgs e)
+        {
+                // Выполняем расчет стоимости страхования
+                double losescost = double.Parse(repairCost.Text) / 2;
+
+                // Устанавливаем результат в TextBox для стоимости страхования
+                losses.Text = losescost.ToString();
+
+                // Устанавливаем результат в свойство losses выбранного объекта InsuranceCase
+                InsuranceCase.losses = Convert.ToString(losescost);
+        }
     }
 }

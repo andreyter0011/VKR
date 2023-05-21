@@ -31,19 +31,20 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition  />
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition  />
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="NameTextBox" Text="Договор" Margin="8,8,8,8" />
         <TextBlock x:Name="AgeTextBox" Text="Номер договора" Grid.Row="1" Margin="8,8,8,8" />
 
         <TextBlock  Text="Договор" Margin="8,8,8,8" />
         <TextBlock  Text="Номер договора" Grid.Row="1" Margin="8,8,8,8" />
+        <TextBlock  Text="Дата заключения договора" Grid.Row="2" Margin="8,8,8,8" />
+        <TextBlock  Text="Дата окончания договора" Grid.Row="3" Margin="8,8,8,8" />
 
         <TextBox Text="{Binding Name}" Grid.Column="1" Margin="8,8,8,8" />
         <TextBox Text="{Binding Age}" Grid.Column="1" Grid.Row="1" Margin="8,8,8,8" />
-        <ComboBox  Name="ClientBox" Grid.Column="3" DisplayMemberPath="Name"></ComboBox>
-        <ComboBox  Name="InsuranceBox" Grid.Column="3" Grid.Row="1" DisplayMemberPath="Type"></ComboBox>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="5" Grid.Column="1" Margin="94,10,0,202" Width="152">
+        <TextBox Text="{Binding DataStartContract}" Grid.Column="1" Grid.Row="2" Margin="8,8,8,8" />
+        <TextBox Text="{Binding DataEndContract}" Grid.Column="1" Grid.Row="3" Margin="8,8,8,8" />
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="5" Margin="10,10,0,79" Width="152">
             <Button IsDefault="True" Click="Accept_Click" Height="63" >OK</Button>
             <Button IsCancel="True" Height="63" >Отмена</Button>
         </StackPanel>

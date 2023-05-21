@@ -16,7 +16,9 @@ namespace VKR.Model
         public string? InsuranceCoverage { get; set; }
         public string? DegreeRisk { get; set; }
         public string? PriceInsurance { get; set; }
+        [ForeignKey("ContractId")]
+        public Contract? Contract { get; set; }
         [ForeignKey("ClientId")]
-        public Client Client { get; set; }
+        public Client? Client { get; set; }
     }
 }

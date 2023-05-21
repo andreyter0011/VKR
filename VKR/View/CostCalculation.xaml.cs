@@ -29,37 +29,29 @@ namespace VKR
 
             Insurance = insurance;
             DataContext = Insurance;
-            db.Clients.Load();
-            ClientBox.ItemsSource = db.Clients.Local.ToObservableCollection();
+            db.Contracts.Load();
+            ContractBox.ItemsSource = db.Contracts.Local.ToObservableCollection();
         }
         void Accept_Click(object sender, RoutedEventArgs e)
         {
-            // Получаем выбранного клиента
-            var selectedClient = (Client)ClientBox.SelectedItem;
+            var selectedContract = (Contract)ContractBox.SelectedItem;
 
-            // Проверяем, что клиент существует
-            if (selectedClient != null)
+            if (selectedContract != null)
             {
-                // Устанавливаем ClientId в объекте Insurance
-                Insurance.Client = selectedClient;
+                Insurance.Contract = selectedContract;
 
-                // Добавляем Insurance в контекст базы данных и сохраняем изменения
                 db.insurances.Add(Insurance);
                 db.SaveChanges();
-
-                // Закрываем окно и возвращаем результат DialogResult = true
                 DialogResult = true;
             }
             else
             {
-                // Выводим сообщение об ошибке, если клиент не выбран
                 MessageBox.Show("Please select a client.");
             }
         }
 
         private void Calculate_Click(object sender, RoutedEventArgs e)
         {
-
             double propertyValue = double.Parse(PropertyValue.Text);
             double insuranceCoverage = double.Parse(InsuranceCoverage.Text) * 0.01;
             double degreeRisk = double.Parse(DegreeRisk.Text);

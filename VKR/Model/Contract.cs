@@ -9,12 +9,11 @@ namespace VKR.Model
 {
     public class Contract
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string Name { get; set; }
         public int NumberContract { get; set; }
-        [ForeignKey("ClientId")]
-        public Client Client { get; set; }
-        [ForeignKey("InsuranceId")]
-        public insurance insurance { get; set; }
+        public DateTime DataStartContract { get; set; }
+        public DateTime DataEndContract { get; set; }
     }
 }

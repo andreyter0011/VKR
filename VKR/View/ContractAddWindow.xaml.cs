@@ -28,18 +28,10 @@ namespace VKR.View
             InitializeComponent();
             Contract = contract;
             DataContext = Contract;
-            db.Clients.Load();
-            db.insurances.Load();
-            ClientBox.ItemsSource = db.Clients.Local.ToObservableCollection();
-            InsuranceBox.ItemsSource = db.insurances.Local.ToObservableCollection();
         }
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
-            var selectedInsurance = (insurance)InsuranceBox.SelectedItem;
-            var selectedClient = (Client)ClientBox.SelectedItem;
-            Contract.insurance = selectedInsurance;
-            Contract.Client = selectedClient;
             // Добавляем Insurance в контекст базы данных и сохраняем изменения
             db.Contracts.Add(Contract);
             db.SaveChanges();

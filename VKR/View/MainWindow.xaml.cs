@@ -59,10 +59,6 @@ namespace VKR
                 Birth = user.Birth,
                 Passport = user.Passport,
                 Contract = user.Contract,
-                DataStartContract = user.DataStartContract,
-                DataEndContract = user.DataEndContract,
-                TypeContract = user.TypeContract,
-                PriceContract = user.PriceContract,
                 HowLongContract = user.HowLongContract,
                 Insurance = user.Insurance,
             });
@@ -78,10 +74,6 @@ namespace VKR
                     user.Birth = UserWindow.Client.Birth;
                     user.Passport = UserWindow.Client.Passport;
                     user.Contract = UserWindow.Client.Contract;
-                    user.DataStartContract = UserWindow.Client.DataStartContract;
-                    user.DataEndContract = UserWindow.Client.DataEndContract;
-                    user.TypeContract = UserWindow.Client.TypeContract;
-                    user.PriceContract = UserWindow.Client.PriceContract;
                     user.HowLongContract = UserWindow.Client.HowLongContract;
                     user.Insurance = UserWindow.Client.Insurance;
                     db.SaveChanges();
@@ -132,10 +124,12 @@ namespace VKR
             if (userList.SelectedItem != null)
             {
                 detailButton.Visibility = Visibility.Visible;
+                ContractAndInsuranceButton.Visibility = Visibility.Visible;
             }
             else
             {
                 detailButton.Visibility = Visibility.Collapsed;
+                ContractAndInsuranceButton.Visibility = Visibility.Visible;
             }
         }
 
@@ -160,6 +154,44 @@ namespace VKR
                 db.SaveChanges();
                 ((ClientAndInsurance)DataContext).Contracts.Remove(contract);
                 CollectionViewSource.GetDefaultView(((ClientAndInsurance)DataContext).Contracts).Refresh();
+            }
+        }
+        private void ContractAndInsurance_Click(object sender, RoutedEventArgs e)
+        {
+            // получаем выделенный объект
+            Client? user = userList.SelectedItem as Client;
+            // если ни одного объекта не выделено, выходим
+            if (user is null) return;
+
+            AddContractAndInsurance UserWindow = new AddContractAndInsurance(new Client
+            {
+                Id = user.Id,
+                Age = user.Age,
+                Name = user.Name,
+                Birth = user.Birth,
+                Passport = user.Passport,
+                Contract = user.Contract,
+                HowLongContract = user.HowLongContract,
+                Insurance = user.Insurance,
+            });
+
+            if (UserWindow.ShowDialog() == true)
+            {
+                // получаем измененный объект
+                user = db.Clients.Find(UserWindow.Client.Id);
+                if (user != null)
+                {
+                    user.Age = UserWindow.Client.Age;
+                    user.Name = UserWindow.Client.Name;
+                    user.Birth = UserWindow.Client.Birth;
+                    user.Passport = UserWindow.Client.Passport;
+                    user.Contract = UserWindow.Client.Contract;
+                    user.HowLongContract = UserWindow.Client.HowLongContract;
+                    user.Insurance = UserWindow.Client.Insurance;
+                    db.SaveChanges();
+
+                    ContractAndInsuranceButton.IsEnabled = false;
+                }
             }
         }
     }

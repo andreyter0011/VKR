@@ -18,12 +18,12 @@
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <DataGrid x:Name="ContractList" ItemsSource="{Binding Path=Contracts}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000">
+                        <DataGrid x:Name="ContractList" ItemsSource="{Binding Path=Clients}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Клиент" Binding="{Binding Client.Name}" FontSize="14"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Тип страховки" Binding="{Binding insurance.Type}" FontSize="14"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Договор" Binding="{Binding Name}" FontSize="14"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Номер договора" Binding="{Binding NumberContract}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Клиент" Binding="{Binding Name}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Тип страховки" Binding="{Binding Insurance.Type}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Договор" Binding="{Binding Contract.Name}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Номер договора" Binding="{Binding Contract.NumberContract}" FontSize="14"></DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
@@ -58,12 +58,27 @@
                                 <DataGridTextColumn Header="Возраст" Binding="{Binding Age}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Дата рождения" Binding="{Binding Birth}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Паспорт" Binding="{Binding Passport}" FontSize="14"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Договор" Binding="{Binding Contract}" FontSize="14"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Дата заключения договора" Binding="{Binding DataStartContract}" FontSize="14"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Дата окончания договора" Binding="{Binding DataEndContract}" FontSize="14"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Тип договора" Binding="{Binding TypeContract}" FontSize="14"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Цена договора" Binding="{Binding PriceContract}" FontSize="14"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Сколько лет действует договор" Binding="{Binding HowLongContract}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Договор" Binding="{Binding Contract.Name}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Дата заключения договора" Binding="{Binding Contract.DataStartContract}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Дата окончания договора" Binding="{Binding Contract.DataEndContract}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Тип страховки" Binding="{Binding Insurance.Type}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Цена страховки" Binding="{Binding Insurance.PriceInsurance}" FontSize="14"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Страховой случай">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <DataGrid x:Name="InsuranceCaseList" ItemsSource="{Binding Path=InsuranceCases}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Страховка" Binding="{Binding insurance.Type}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Дата происшествия" Binding="{Binding date}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Описание происшествия" Binding="{Binding description}" FontSize="14"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Выплаты" Binding="{Binding losses}" FontSize="14"></DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>

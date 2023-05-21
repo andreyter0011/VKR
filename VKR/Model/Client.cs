@@ -18,13 +18,10 @@ namespace VKR.Model
         public int Age { get; set; }
         public DateTime Birth { get; set; }
         public int Passport { get; set; }
-        public string? Contract { get; set; }
-        public DateTime DataStartContract { get; set; }
-        public DateTime DataEndContract { get; set; }
-        public string? TypeContract { get; set; }
-        public decimal PriceContract { get; set; }
         public int HowLongContract { get; set; }
         [ForeignKey("InsuranceId")]
         public insurance? Insurance { get; set; }
+        [ForeignKey("ContractId")]
+        public Contract? Contract { get; set; }
     }
 }

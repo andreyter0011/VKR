@@ -8,9 +8,10 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition  />
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition  />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -18,18 +19,27 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition  />
         </Grid.RowDefinitions>
         <TextBlock Text="Дата происшествия" Margin="8,8,8,8" />
         <TextBlock Text="Описание происшествия" Grid.Row="1" Margin="8,8,8,8" />
-        <TextBlock Text="Убытки" Grid.Row="2" Margin="8,8,8,8" />
-        <TextBlock x:Name="Insurance" Text="Страховка"  Grid.Column="3" Margin="8,8,8,8" />
+        <TextBlock Text="Стоимость ремонта" Grid.Row="2" Margin="8,8,8,8" />
+        <TextBlock Text="Эксперт" Grid.Row="1" Grid.Column="2" Margin="8,8,8,8" />
+        <TextBlock Text="Статус выплат" Grid.Row="3" Grid.Column="0" Margin="8,8,8,8" />
+        <TextBlock x:Name="Insurance" Text="Страховка"  Grid.Column="2" Margin="8,8,8,8" />
 
-        <DatePicker x:Name="Type" Text="{Binding date }" Grid.Column="1" Margin="8,8,8,8" />
-        <TextBox x:Name="PropertyValue" Text="{Binding description}" Grid.Column="1" Grid.Row="1" Margin="8,8,8,8" />
-        <TextBox x:Name="InsuranceCoverage" Text="{Binding losses}" Grid.Column="1" Grid.Row="2" Margin="8,8,8,8" />
-        <ComboBox  Name="InsuranceBox" Grid.Column="1" DisplayMemberPath="Type" Grid.ColumnSpan="3" Margin="318,36,0,0" Grid.RowSpan="2" VerticalAlignment="Top"></ComboBox>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="5" Margin="10,63,0,132" Width="200" Grid.ColumnSpan="2">
+        <DatePicker x:Name="Date" Text="{Binding date }" Grid.Column="1" Margin="8,8,8,8" />
+        <TextBox x:Name="Description" Text="{Binding description}" Grid.Column="1" Grid.Row="1" Margin="8,8,8,8" />
+        <TextBlock Text="Выплаты" Grid.Row="2" Grid.Column ="2" Margin="8 8 8 8">
+            <TextBox Text="{Binding losses, Mode=OneWay}" x:Name="losses" IsReadOnly="True" Grid.Column="2" Grid.Row="4" Margin="8,8,8,8"></TextBox>
+        </TextBlock>
+        <TextBox x:Name="repairCost" Text="{Binding repairCost}" Grid.Column="1" Grid.Row="2" Margin="8,8,8,8" />
+        <TextBox x:Name="expert" Text="{Binding expert}" Grid.Column="4" Grid.Row="1" Margin="8,8,8,8" />
+        <TextBox x:Name="status" Text="{Binding status}" Grid.Column="1" Grid.Row="3" Margin="8,8,8,8" />
+        <ComboBox  Name="InsuranceBox" Grid.Column="4" Grid.Row="0" DisplayMemberPath="Type" Grid.ColumnSpan="2" Margin="8 8 8 8" Grid.RowSpan="2" VerticalAlignment="Top"></ComboBox>
+        <StackPanel Grid.Row="4" Grid.Column="4" Margin="8,4,-8,179">
+            <Button IsCancel="True" Width="164" Content="Рассчитать убытки" Click="CalculateLoses_Click" Margin="8 8 8 8" />
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="4" Margin="10,10,0,185" Width="380" Grid.ColumnSpan="5">
             <Button IsDefault="True" Click="Accept_Click" Width="74" Content="ОК" Margin="8 8 8 8" ></Button>
             <Button IsCancel="True" Width="92" Content="Отмена" Margin="8 8 8 8" />
         </StackPanel>

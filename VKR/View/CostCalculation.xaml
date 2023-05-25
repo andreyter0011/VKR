@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="CostCalculation" Height="450" Width="800">
+        Title="CostCalculation" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -18,28 +18,55 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition  />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <TextBlock Text="Тип страховки" Margin="8,8,8,8" />
         <TextBlock Text="Стоимость имущества" Grid.Row="1" Margin="8,8,8,8" />
         <TextBlock Text="Ставка страхования" Grid.Row="2" Margin="8,8,8,8" />
         <TextBlock Text="Коэффициент риска" Grid.Row="3" Margin="8,8,8,8" />
-        <TextBlock x:Name="Client" Text="Догоров"  Grid.Column="3" Margin="8,8,8,8" />
-
+        <TextBlock x:Name="Client" Text="Договор"  Grid.Column="3" Margin="8,8,8,8" />
         <TextBox x:Name="Type" Text="{Binding Type }" Grid.Column="1" Margin="8,8,8,8" />
         <TextBox x:Name="PropertyValue" Text="{Binding PropertyValue}" Grid.Column="1" Grid.Row="1" Margin="8,8,8,8" />
         <TextBox x:Name="InsuranceCoverage" Text="{Binding InsuranceCoverage}" Grid.Column="1" Grid.Row="2" Margin="8,8,8,8" />
         <TextBox x:Name="DegreeRisk" Text="{Binding DegreeRisk}" Grid.Column="1" Grid.Row="3" Margin="8,8,8,8" />
-        <ComboBox  Name="ContractBox" Grid.Column="1" DisplayMemberPath="Name" Grid.ColumnSpan="3" Margin="318,36,0,0" Grid.RowSpan="2" VerticalAlignment="Top"></ComboBox>
-        <TextBlock Text="Стоимость страхования" Grid.Row="4" Margin="8 8 8 8">
-            <TextBox x:Name="PriceInsurance" IsReadOnly="True" Grid.Column="1" Grid.Row="4" Margin="8,8,8,8"></TextBox>
+        <ComboBox  Name="ContractBox" Grid.Column="1" DisplayMemberPath="Name" Grid.ColumnSpan="3" Margin="318,36,0,0" Grid.RowSpan="2" VerticalAlignment="Top" SelectionChanged="ContractBox_SelectionChanged">
+        </ComboBox>
+        <TextBlock Text="Стоимость страхования" Grid.Row="8" Margin="8 8 8 8">
+            <TextBox x:Name="PriceInsurance" IsReadOnly="True" Grid.Column="1" Grid.Row="8" Margin="8,8,8,8"></TextBox>
         </TextBlock>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="5" Margin="10,10,0,121" Width="276" Grid.ColumnSpan="2">
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="9" Margin="100 100 100 100" Width="276" Grid.ColumnSpan="2">
             <Button IsDefault="True" Content="Рассчитать стоимость страховки" Click="Calculate_Click" Margin="8 8 8 8" ></Button>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="5" Margin="159,80,0,40" Width="200" Grid.ColumnSpan="3" Grid.Column="1">
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="9" Margin="8 8 8 8" Width="200" Grid.Column="3">
             <Button IsDefault="True" Click="Accept_Click" Width="74" Content="ОК" Margin="8 8 8 8" ></Button>
             <Button IsCancel="True" Width="92" Content="Отмена" Margin="8 8 8 8" />
         </StackPanel>
+        <!-- Недвижимость -->
+        <TextBlock Text="Квадратные метры" Grid.Row="4" Margin="8,8,8,8" Name="SquareMeters" Visibility="Collapsed" />
+        <TextBox Text="{Binding SquareMeters}" Grid.Row="4" Grid.Column="1" Margin="8,8,8,8" Name="SquareMetersTextBox" Visibility="Collapsed" />
+
+        <TextBlock Text="Количество комнат" Grid.Row="5" Margin="8,8,8,8" Name="RoomCount" Visibility="Collapsed" />
+        <TextBox Text="{Binding RoomCount}" Grid.Row="5" Grid.Column="1" Margin="8,8,8,8" Name="RoomCountTextBox" Visibility="Collapsed" />
+
+        <TextBlock Text="Этаж" Grid.Row="6" Margin="8,8,8,8" Name="Floor" Visibility="Collapsed" />
+        <TextBox Text="{Binding Floor}" Grid.Row="6" Grid.Column="1" Margin="8,8,8,8" Name="FloorTextBox" Visibility="Collapsed" />
+
+        <!-- Движимое имущество -->
+        <TextBlock Text="Тип ТС" Grid.Row="4" Margin="8,8,8,8" Name="VehicleType" Visibility="Collapsed" />
+        <TextBox Text="{Binding VehicleType}" Grid.Row="4" Grid.Column="1" Margin="8,8,8,8" Name="VehicleTypeTextBox" Visibility="Collapsed" />
+
+        <TextBlock Text="Период использования" Grid.Row="5" Margin="8,8,8,8" Name="UsagePeriod" Visibility="Collapsed" />
+        <TextBox Text="{Binding UsagePeriod}" Grid.Row="5" Grid.Column="1" Margin="8,8,8,8" Name="UsagePeriodTextBox" Visibility="Collapsed" />
+
+        <TextBlock Text="Мощность, л.с" Grid.Row="6" Margin="8,8,8,8" Name="Horsepower" Visibility="Collapsed" />
+        <TextBox Text="{Binding Horsepower}" Grid.Row="6" Grid.Column="1" Margin="8,8,8,8" Name="HorsepowerTextBox" Visibility="Collapsed" />
+
+        <TextBlock Text="Мощность, кВт" Grid.Row="7" Margin="8,8,8,8" Name="Kilowatts" Visibility="Collapsed" />
+        <TextBox Text="{Binding Kilowatts}" Grid.Row="7" Grid.Column="1" Margin="8,8,8,8" Name="KilowattsTextBox" Visibility="Collapsed" />
     </Grid>
 </Window>

@@ -13,6 +13,7 @@ namespace VKR.Model
         public Guid Id { get; set; }
         public string Name { get; set; }
         public int NumberContract { get; set; }
+        public int insuranceCompanyBudget { get; set; }
         public DateTime DataStartContract { get; set; }
         public DateTime DataEndContract { get; set; }
     }

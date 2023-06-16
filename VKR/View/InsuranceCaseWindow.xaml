@@ -3,9 +3,27 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"
+        xmlns:datagridThemes="clr-namespace:ActiproSoftware.Windows.Themes"
+        xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
         mc:Ignorable="d"
         Title="InsuranceCaseWindow" Height="450" Width="800">
+    <themes:WindowChrome.Chrome>
+        <themes:WindowChrome />
+    </themes:WindowChrome.Chrome>
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+            <Setter Property="Background" Value="#5dbea3"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </Window.Resources>
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="LightBlue" Offset="0"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
@@ -35,7 +53,7 @@
         <TextBox x:Name="repairCost" Text="{Binding repairCost}" Grid.Column="1" Grid.Row="2" Margin="8,8,8,8" />
         <TextBox x:Name="expert" Text="{Binding expert}" Grid.Column="4" Grid.Row="1" Margin="8,8,8,8" />
         <TextBox x:Name="status" Text="{Binding status}" Grid.Column="1" Grid.Row="3" Margin="8,8,8,8" />
-        <ComboBox  Name="InsuranceBox" Grid.Column="4" Grid.Row="0" DisplayMemberPath="Type" Grid.ColumnSpan="2" Margin="8 8 8 8" Grid.RowSpan="2" VerticalAlignment="Top"></ComboBox>
+        <ComboBox  Name="InsuranceBox" Grid.Column="4" Grid.Row="0" DisplayMemberPath="Type" Grid.ColumnSpan="2" Margin="8 8 8 8" Grid.RowSpan="2" VerticalAlignment="Top" Background="LightBlue"></ComboBox>
         <StackPanel Grid.Row="4" Grid.Column="4" Margin="8,4,-8,179">
             <Button IsCancel="True" Width="164" Content="Рассчитать убытки" Click="CalculateLoses_Click" Margin="8 8 8 8" />
         </StackPanel>

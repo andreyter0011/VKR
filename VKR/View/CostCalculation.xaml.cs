@@ -46,7 +46,7 @@ namespace VKR
             }
             else
             {
-                MessageBox.Show("Please select a client.");
+                MessageBox.Show("Пожалуйста, выберите клиента!.");
             }
         }
 
@@ -63,19 +63,19 @@ namespace VKR
                 int SelectedBudget = selectedContract.insuranceCompanyBudget;
                 if (selectedValue == "Недвижимость")
                 {
-                    double squareMeters = double.Parse(SquareMetersTextBox.Text);
-                    double roomCount = double.Parse(RoomCountTextBox.Text);
-                    double floor = double.Parse(FloorTextBox.Text);
+                    double squareMeters = double.Parse(SquareMetersTextBox.Text) * 0.01;
+                    double roomCount = double.Parse(RoomCountTextBox.Text) * 0.01;
+                    double floor = double.Parse(FloorTextBox.Text) * 0.01;
 
                     // Выполняем расчет стоимости страхования для недвижимости
                     insuranceCost = propertyValue * insuranceCoverage * degreeRisk * (squareMeters + roomCount + floor);
                 }
                 else if (selectedValue == "Движимое имущество")
                 {
-                    double vehicleType = double.Parse(VehicleTypeTextBox.Text);
-                    double usagePeriod = double.Parse(UsagePeriodTextBox.Text);
-                    double horsepower = double.Parse(HorsepowerTextBox.Text);
-                    double kilowatts = double.Parse(KilowattsTextBox.Text);
+                    double vehicleType = double.Parse(VehicleTypeTextBox.Text) * 0.01;
+                    double usagePeriod = double.Parse(UsagePeriodTextBox.Text) * 0.01;
+                    double horsepower = double.Parse(HorsepowerTextBox.Text) * 0.01;
+                    double kilowatts = double.Parse(KilowattsTextBox.Text) * 0.01;
 
                     // Выполняем расчет стоимости страхования для движимого имущества
                     insuranceCost = propertyValue * insuranceCoverage * degreeRisk * (vehicleType + usagePeriod + horsepower + kilowatts);

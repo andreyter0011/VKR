@@ -1,0 +1,35 @@
+﻿<Window x:Class="VKR.View.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"
+        xmlns:local="clr-namespace:VKR.View"
+        mc:Ignorable="d"
+        Title="Login" Height="611" Width="450">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+            <Setter Property="Background" Value="#5dbea3"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </Window.Resources>
+    <themes:WindowChrome.Chrome>
+        <themes:WindowChrome />
+    </themes:WindowChrome.Chrome>
+    <Grid>
+        <Grid>
+            <Button Content="Вход" x:Name="register" Margin="112,287,112,231" Click="register_Click"/>
+            <Button Content="Отмена" x:Name="cancel" Margin="112,373,112,190"/>
+            <Label Content="Логин" HorizontalAlignment="Left" Margin="110,83,0,0" VerticalAlignment="Top"/>
+            <Label Content="Пароль" HorizontalAlignment="Left" Margin="109,149,0,0" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Margin="112,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="191"/>
+            <TextBox HorizontalAlignment="Left" Margin="112,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="191"/>
+            <CheckBox Content="Запомнить меня" HorizontalAlignment="Left" Margin="112,219,0,0" VerticalAlignment="Top"/>
+            <Button HorizontalAlignment="Left" Margin="239,215,0,0" VerticalAlignment="Top" Height="32" Width="64">
+                <StackPanel>
+                    <Image Source="/Resource/forgot.png" Height="17" Width="43"></Image>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

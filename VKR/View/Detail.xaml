@@ -4,27 +4,119 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"
+        xmlns:datagridThemes="clr-namespace:ActiproSoftware.Windows.Themes"
+        xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
         mc:Ignorable="d"
         Title="Detail" Height="450" Width="800" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="{x:Type TabControl}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabControl}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TabPanel Grid.Row="0" Panel.ZIndex="1" Background="#2B579A" IsItemsHost="True"/>
+                            <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1">
+                                <Border Background="White" Margin="0 5 0 0">
+                                    <ContentPresenter ContentSource="SelectedContent"/>
+                                </Border>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid>
+                            <Border x:Name="Border" Background="Transparent" BorderBrush="Transparent" BorderThickness="1,1,1,0">
+                                <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,2"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Control.Foreground).(SolidColorBrush.Color)"
+                                                            To="White" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Control.Foreground).(SolidColorBrush.Color)"
+                                                            To="White" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="Gray"/>
+                                <Setter TargetName="ContentSite" Property="Margin" Value="10,2,10,0"/>
+                                <Setter Property="Foreground" Value="Gray"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="LightGray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+            <Setter Property="Background" Value="#5dbea3"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </Window.Resources>
     <Window.DataContext>
         <vm:ClientAndInsurance />
     </Window.DataContext>
+    <themes:WindowChrome.Chrome>
+        <themes:WindowChrome />
+    </themes:WindowChrome.Chrome>
     <Grid>
         <Grid>
             <TabControl>
                 <TabItem Header="Договор">
                     <Grid>
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="LightBlue" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Grid.Background>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <DataGrid x:Name="ContractList" ItemsSource="{Binding Path=Clients}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000">
+                        <DataGrid x:Name="ContractList" ItemsSource="{Binding Path=Clients}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" BorderBrush="#1FFF0000" Foreground="#DD000000"
+                                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserSortColumns="False" AlternationCount="2" GridLinesVisibility="All" HorizontalGridLinesBrush="#D4D4D4" VerticalGridLinesBrush="#D4D4D4" Margin="0,-5,0,0">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Клиент" Binding="{Binding Name}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Тип страховки" Binding="{Binding Insurance.Type}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Договор" Binding="{Binding Contract.Name}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Номер договора" Binding="{Binding Contract.NumberContract}" FontSize="14"></DataGridTextColumn>
                             </DataGrid.Columns>
+                            <DataGrid.Resources>
+                                <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="#DD000000"/>
+                                    <Setter Property="FontSize" Value="14"/>
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="LightBlue" Offset="0"/>
+                                    <GradientStop Color="White" Offset="1"/>
+                                </LinearGradientBrush>
+                            </DataGrid.Background>
                         </DataGrid>
                     </Grid>
                 </TabItem>
@@ -34,7 +126,8 @@
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <DataGrid x:Name="InsuranceList" ItemsSource="{Binding Path=Insurances}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000">
+                        <DataGrid x:Name="InsuranceList" ItemsSource="{Binding Path=Insurances}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" BorderBrush="#1FFF0000" Foreground="#DD000000"
+                                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserSortColumns="False" AlternationCount="2" GridLinesVisibility="All" HorizontalGridLinesBrush="#D4D4D4" VerticalGridLinesBrush="#D4D4D4" Margin="0,-5,0,0">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Клиент" Binding="{Binding Client.Name}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Тип страховки" Binding="{Binding Type}" FontSize="14"></DataGridTextColumn>
@@ -43,6 +136,19 @@
                                 <DataGridTextColumn Header="Коэффициент риска" Binding="{Binding DegreeRisk}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Цена страхования" Binding="{Binding PriceInsurance}" FontSize="14"></DataGridTextColumn>
                             </DataGrid.Columns>
+                            <DataGrid.Resources>
+                                <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="#DD000000"/>
+                                    <Setter Property="FontSize" Value="14"/>
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="LightBlue" Offset="0"/>
+                                    <GradientStop Color="White" Offset="1"/>
+                                </LinearGradientBrush>
+                            </DataGrid.Background>
                         </DataGrid>
                     </Grid>
                 </TabItem>
@@ -52,7 +158,8 @@
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <DataGrid x:Name="userList" ItemsSource="{Binding Path=Clients}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000">
+                        <DataGrid x:Name="userList" ItemsSource="{Binding Path=Clients}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" BorderBrush="#1FFF0000" Foreground="#DD000000"
+                                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserSortColumns="False" AlternationCount="2" GridLinesVisibility="All" HorizontalGridLinesBrush="#D4D4D4" VerticalGridLinesBrush="#D4D4D4" Margin="0,-5,0,0">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ФИО" Binding="{Binding Name}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Возраст" Binding="{Binding Age}" FontSize="14"></DataGridTextColumn>
@@ -64,6 +171,19 @@
                                 <DataGridTextColumn Header="Тип страховки" Binding="{Binding Insurance.Type}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Цена страховки" Binding="{Binding Insurance.PriceInsurance}" FontSize="14"></DataGridTextColumn>
                             </DataGrid.Columns>
+                            <DataGrid.Resources>
+                                <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="#DD000000"/>
+                                    <Setter Property="FontSize" Value="14"/>
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="LightBlue" Offset="0"/>
+                                    <GradientStop Color="White" Offset="1"/>
+                                </LinearGradientBrush>
+                            </DataGrid.Background>
                         </DataGrid>
                     </Grid>
                 </TabItem>
@@ -73,13 +193,27 @@
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <DataGrid x:Name="InsuranceCaseList" ItemsSource="{Binding Path=InsuranceCases}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" Background="White" BorderBrush="#1FFF0000" Foreground="#DD000000">
+                        <DataGrid x:Name="InsuranceCaseList" ItemsSource="{Binding Path=InsuranceCases}"  IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False" Height="273" VerticalAlignment="Top" Grid.ColumnSpan="2" BorderBrush="#1FFF0000" Foreground="#DD000000"
+                                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserSortColumns="False" AlternationCount="2" GridLinesVisibility="All" HorizontalGridLinesBrush="#D4D4D4" VerticalGridLinesBrush="#D4D4D4" Margin="0,-5,0,0">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Страховка" Binding="{Binding insurance.Type}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Дата происшествия" Binding="{Binding date}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Описание происшествия" Binding="{Binding description}" FontSize="14"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Выплаты" Binding="{Binding losses}" FontSize="14"></DataGridTextColumn>
                             </DataGrid.Columns>
+                            <DataGrid.Resources>
+                                <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="#DD000000"/>
+                                    <Setter Property="FontSize" Value="14"/>
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="LightBlue" Offset="0"/>
+                                    <GradientStop Color="White" Offset="1"/>
+                                </LinearGradientBrush>
+                            </DataGrid.Background>
                         </DataGrid>
                     </Grid>
                 </TabItem>

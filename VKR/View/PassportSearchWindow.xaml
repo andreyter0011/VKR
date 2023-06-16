@@ -1,0 +1,27 @@
+﻿<Window x:Class="VKR.View.PassportSearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VKR.View"
+        mc:Ignorable="d"
+        Title="PassportSearchWindow" Height="233" Width="351">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+            <Setter Property="Background" Value="#5dbea3"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="LightBlue" Offset="0"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label Content="Введите паспортные данные" HorizontalAlignment="Left" Margin="73,70,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="passportTextBox" TextChanged="passportTextBox_TextChanged" HorizontalAlignment="Left" Margin="27,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259"/>
+        <Button Content="Показать информацию о клиенте" HorizontalAlignment="Left" Margin="27,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.195,0.131" Width="259"/>
+
+    </Grid>
+</Window>

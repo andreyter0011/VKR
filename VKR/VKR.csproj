@@ -8,6 +8,47 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resource\account-details.png" />
+    <None Remove="Resource\account-plus.png" />
+    <None Remove="Resource\add.png" />
+    <None Remove="Resource\cogs.png" />
+    <None Remove="Resource\delete.png" />
+    <None Remove="Resource\edit.png" />
+    <None Remove="Resource\information.png" />
+    <None Remove="Resource\login.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resource\account-details.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\account-plus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\add.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\cogs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\delete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\edit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\information.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\login.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ActiproSoftware.Controls.WPF" Version="23.1.0" />
+    <PackageReference Include="ActiproSoftware.Controls.WPF.Shared" Version="23.1.0" />
+    <PackageReference Include="ActiproSoftware.Controls.WPF.Themes.Aero" Version="23.1.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.8.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.5" />
   </ItemGroup>

@@ -1,0 +1,29 @@
+﻿<Window x:Class="VKR.View.Register"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"
+        xmlns:local="clr-namespace:VKR.View"
+        mc:Ignorable="d"
+        Title="Register" Height="566" Width="450">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+            <Setter Property="Background" Value="#5dbea3"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </Window.Resources>
+    <themes:WindowChrome.Chrome>
+        <themes:WindowChrome />
+    </themes:WindowChrome.Chrome>
+    <Grid>
+        <Button Content="Регистрация" x:Name="register" Margin="112,301,112,122"/>
+        <Button Content="Отмена" x:Name="cancel" Margin="112,359,113,64"/>
+        <Label Content="Логин" HorizontalAlignment="Left" Margin="110,83,0,0" VerticalAlignment="Top"/>
+        <Label Content="Пароль" HorizontalAlignment="Left" Margin="109,149,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="112,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="191"/>
+        <TextBox HorizontalAlignment="Left" Margin="112,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="191"/>
+        <Label Content="Повторите пароль" HorizontalAlignment="Left" Margin="108,211,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="112,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="191"/>
+    </Grid>
+</Window>
